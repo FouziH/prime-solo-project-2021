@@ -8,6 +8,23 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 function Homepage() {
+const styles = {
+  card: {
+    backgroundColor: "#B7E0F2",
+    borderRadius: 55,
+    padding: "3rem",
+    margin: "10px",
+    width:"50vw",
+    height: "30vh"
+  },
+  cardImage: {
+    objectFit: "cover",
+    width:"50vw",
+    height: "30vh"
+    
+  },
+};
+
   const dispatch = useDispatch()
   const companyInformation = useSelector((store) => store.companyReducer);
   const [search, setSearch] = useState('')
@@ -69,7 +86,7 @@ function Homepage() {
 
       {companyInformation.map((items) => (
         <Card style={{ width: "18rem" }} key={items.id}>
-          <Card.Img variant="top" src={items.imageUrl} />
+          <Card.Img variant="top" src={items.imageUrl} style={styles.cardImage} />
           <Card.Body>
             <Card.Text>Rating 4.55</Card.Text>
             <Card.Title>{items.companyName}</Card.Title>
