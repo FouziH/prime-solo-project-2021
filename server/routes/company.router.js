@@ -3,12 +3,13 @@ const pool = require("../modules/pool");
 const router = express.Router();
 
 router.get("/homepage", (req, res) => {
-  let sqlQuery = `SELECT * FROM "company" 
-  WHERE "companyName" = $1;`
-  const params = [req.query.search];
+//   const params = [req.query.search];
+  let sqlQuery = `  SELECT * FROM "company" WHERE LOWER("companyName") LIKE $1  OR UPPER("companyName") LIKE $1 OR INITCAP("companyName") LIKE $1 `;
+
+//   console.log(params);
 
   pool
-    .query(sqlQuery, params)
+    .query(sqlQuery, [`%${req.query.search}%`])
     .then((dbRes) => {
       console.log(dbRes.rows);
       res.send(dbRes.rows);

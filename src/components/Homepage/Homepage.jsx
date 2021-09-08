@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, NavDropdown, Form, FormControl,Button, Card} from "react-bootstrap";
+import { Navbar, Nav, NavDropdown, Form, FormControl,Button, Card, Container, Col, Row} from "react-bootstrap";
 import LoginPage from '../LoginPage/LoginPage';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useEffect} from 'react';
@@ -11,28 +11,28 @@ function Homepage() {
 const styles = {
   card: {
     backgroundColor: "#B7E0F2",
-    borderRadius: 55,
     padding: "3rem",
-    margin: "10px",
-    width:"50vw",
-    height: "30vh"
+    margin: "auto 5px",
+    width: "80vw",
+    height: "30vh",
+    display: "flex",
+    flexDirection: "rows",
   },
   cardImage: {
     objectFit: "cover",
-    width:"50vw",
-    height: "30vh"
-    
+    width: "40vw",
+    height: "30vh",
   },
 };
 
   const dispatch = useDispatch()
   const companyInformation = useSelector((store) => store.companyReducer);
   const [search, setSearch] = useState('')
-  useEffect(() => {
-    dispatch({
-      type: "FETCH_COMPANY",
-    });
-  }, [])
+//   useEffect(() => {
+//     dispatch({
+//       type: "FETCH_COMPANY",
+//     });
+//   }, [])
 
   const onSearch =()=>{
     console.log("search is", search)
@@ -83,21 +83,30 @@ const styles = {
           </NavDropdown>
         </Navbar.Collapse>
       </Navbar>
-
-      {companyInformation.map((items) => (
-        <Card style={{ width: "18rem" }} key={items.id}>
-          <Card.Img variant="top" src={items.imageUrl} style={styles.cardImage} />
-          <Card.Body>
-            <Card.Text>Rating 4.55</Card.Text>
-            <Card.Title>{items.companyName}</Card.Title>
-            <Card.Text>
-              {items.address} {items.city}, {items.state} {items.zip}
-            </Card.Text>
-            <Card.Text>Phone number: {items.phoneNumber}</Card.Text>
-            <Button variant="primary">Go somewhere</Button>
-          </Card.Body>
-        </Card>
-      ))}
+      <Container> 
+        <Row xs={6} md={3}>
+          <Col>
+            {companyInformation.map((items) => (
+              <Card style={{ width: "18rem", flex: 1 }} key={items.id}>
+                <Card.Img
+                  variant="top"
+                  src={items.imageUrl}
+                  style={styles.cardImage}
+                />
+                <Card.Body>
+                  <Card.Text>Rating 4.55</Card.Text>
+                  <Card.Title>{items.companyName}</Card.Title>
+                  <Card.Text>
+                    {items.address} {items.city}, {items.state} {items.zip}
+                  </Card.Text>
+                  <Card.Text>Phone number: {items.phoneNumber}</Card.Text>
+                  <Button variant="primary">Go somewhere</Button>
+                </Card.Body>
+              </Card>
+            ))}
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 }
