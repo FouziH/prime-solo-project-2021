@@ -5,6 +5,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 
 
 function Homepage() {
@@ -28,11 +29,11 @@ const styles = {
   const dispatch = useDispatch()
   const companyInformation = useSelector((store) => store.companyReducer);
   const [search, setSearch] = useState('')
-//   useEffect(() => {
-//     dispatch({
-//       type: "FETCH_COMPANY",
-//     });
-//   }, [])
+  useEffect(() => {
+    dispatch({
+      type: "FETCH_COMPANY",
+    });
+  }, [])
 
   const onSearch =()=>{
     console.log("search is", search)
