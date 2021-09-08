@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function Homepage() {
   const dispatch = useDispatch()
-  const companyInformation = useSelector((store) => store.homepageReducer);
+  const companyInformation = useSelector((store) => store.companyReducer);
   const [search, setSearch] = useState('')
   useEffect(() => {
     dispatch({
@@ -66,24 +66,21 @@ function Homepage() {
           </NavDropdown>
         </Navbar.Collapse>
       </Navbar>
-      <Card style={{ width: "18rem" }}>
-          {companyInformation.map(items => {
-              {
-                /* <Card.Img variant="top" src="..." /> */
-              }
-              <Card.Body>
-                <Card.Text>Rating 4.55</Card.Text>
-                <Card.Title>Company Name</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
-              </Card.Body>;
 
-          })}
-        
-      </Card>
+      {companyInformation.map((items) => (
+        <Card style={{ width: "18rem" }} key={items.id}>
+          <Card.Img variant="top" src={items.imageUrl} />
+          <Card.Body>
+            <Card.Text>Rating 4.55</Card.Text>
+            <Card.Title>{items.companyName}</Card.Title>
+            <Card.Text>
+              {items.address} {items.city}, {items.state} {items.zip}
+            </Card.Text>
+            <Card.Text>Phone number: {items.phoneNumber}</Card.Text>
+            <Button variant="primary">Go somewhere</Button>
+          </Card.Body>
+        </Card>
+      ))}
     </>
   );
 }
