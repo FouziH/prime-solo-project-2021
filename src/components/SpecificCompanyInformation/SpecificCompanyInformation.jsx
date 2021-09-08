@@ -6,6 +6,9 @@ import {
   Container,
   Col,
   Row,
+  Nav,
+  Navbar,
+  NavDropdown
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 function SpecificCompanyInformation () {
@@ -27,6 +30,27 @@ function SpecificCompanyInformation () {
     },
 }
 return(
+  <>
+   <Navbar
+        bg="light"
+        expand="lg"
+        className="navbar navbar-default navbar-fixed-top"
+        role="navigation"
+      >
+        <Navbar.Brand href="#">LAW AUDIT</Navbar.Brand>
+        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Collapse id="navbarScroll">
+          <Nav
+            className="mr-auto my-2 my-lg-0"
+            style={{ maxHeight: "100px" }}
+            navbarScroll
+          ></Nav>
+          <NavDropdown title={"Home"} id="navbarScrollingDropdown">
+            <NavDropdown.Item href="#action3">Log-in</NavDropdown.Item>
+            <NavDropdown.Item href="#action4">Sign-up</NavDropdown.Item>
+          </NavDropdown>
+        </Navbar.Collapse>
+  </Navbar>
   <Container> 
         <Row xs={6} md={3}>
           <Col>
@@ -51,6 +75,7 @@ return(
           </Col>
         </Row>
       </Container>
+      </>
     
   )
 }
