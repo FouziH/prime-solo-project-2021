@@ -9,21 +9,22 @@ import { useHistory } from 'react-router';
 
 
 function Homepage() {
-const styles = {
-  card: {
-    backgroundColor: "#B7E0F2",
-    padding: "3rem",
-    margin: "auto 5px",
-    width: "80vw",
-    height: "30vh",
-    display: "flex",
-    flexDirection: "rows",
-  },
-  cardImage: {
-    objectFit: "cover",
-    width: "40vw",
-    height: "30vh",
-  },
+  const history = useHistory()
+  const styles = {
+    card: {
+      backgroundColor: "#B7E0F2",
+      padding: "3rem",
+      margin: "auto 5px",
+      width: "80vw",
+      height: "30vh",
+      display: "flex",
+      flexDirection: "rows",
+    },
+    cardImage: {
+      objectFit: "cover",
+      width: "40vw",
+      height: "30vh",
+    },
 };
 
   const dispatch = useDispatch()
@@ -42,6 +43,7 @@ const styles = {
       payload: search,
     });
     setSearch('')
+    history.push("/companyInfo");
     
   }
 

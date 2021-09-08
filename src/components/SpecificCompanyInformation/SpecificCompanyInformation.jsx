@@ -1,9 +1,33 @@
-import { useDispatch, useSelector } from "react-redux";
-function SpecificCompanyInformation() {
+import React from 'react'
+import {  useSelector } from "react-redux";
+import {
+  Button,
+  Card,
+  Container,
+  Col,
+  Row,
+} from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+function SpecificCompanyInformation () {
   const searchResults = useSelector((store) => store.homepageReducer);
-  return (
-    <>
-      <Container>
+   const styles = {
+    card: {
+      backgroundColor: "#B7E0F2",
+      padding: "3rem",
+      margin: "auto 5px",
+      width: "80vw",
+      height: "30vh",
+      display: "flex",
+      flexDirection: "rows",
+    },
+    cardImage: {
+      objectFit: "cover",
+      width: "40vw",
+      height: "30vh",
+    },
+}
+return(
+  <Container> 
         <Row xs={6} md={3}>
           <Col>
             {searchResults.map((items) => (
@@ -27,8 +51,8 @@ function SpecificCompanyInformation() {
           </Col>
         </Row>
       </Container>
-    </>
-  );
+    
+  )
 }
 
 export default SpecificCompanyInformation
