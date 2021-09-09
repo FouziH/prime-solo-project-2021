@@ -36,16 +36,16 @@ function Homepage() {
     });
   }, [])
 
-  const onSearch =()=>{
+  const onSearch = () => {
     console.log("search is", search)
     dispatch({
       type: "FETCH_COMPANY_INFORMATION",
       payload: search,
     });
     setSearch('')
-    history.push("/companyInfo");
-    
+    history.push("/companyInfo"); 
   }
+  
 
   return (
     <>
@@ -103,7 +103,13 @@ function Homepage() {
                     {items.address} {items.city}, {items.state} {items.zip}
                   </Card.Text>
                   <Card.Text>Phone number: {items.phoneNumber}</Card.Text>
-                  <Button variant="primary">Go somewhere</Button>
+                  <Button variant="primary" onClick={() => {dispatch({
+                    type: "FETCH_COMPANY_INFORMATION",
+                    payload: items.id
+                  })
+                history.push("/companyInfo");
+                  }                  
+                  }>Lear More</Button>
                 </Card.Body>
               </Card>
             ))}
