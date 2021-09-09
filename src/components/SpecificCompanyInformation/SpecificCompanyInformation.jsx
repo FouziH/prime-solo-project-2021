@@ -14,8 +14,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useHistory } from "react-router";
 function SpecificCompanyInformation () {
   const history = useHistory()
-  const searchResults = useSelector((store) => store.homepageReducer);
-  console.log("search result is:", searchResults)
+  const company = useSelector((store) => store.companyIdReducer);
+  const companyReviews = useSelector((store) => store.companyReviewReducer);
+  console.log("search result is:", company)
    const styles = {
     card: {
       backgroundColor: "#B7E0F2",
@@ -62,8 +63,8 @@ return (
     <Container>
       <Row xs={6} md={3}>
         <Col>
-          {searchResults.map((items) => (
-            <Card style={{ width: "18rem", flex: 1 }} key={items.id}>
+          {company.map((items, i) => (
+            <Card style={{ width: "18rem", flex: 1 }} key={i}>
               <Card.Img
                 variant="top"
                 src={items.imageUrl}
@@ -71,7 +72,8 @@ return (
               />
               <Card.Body>
                 <Card.Text>
-                  Average Rating: {(items.jobculture +
+                  Average Rating:{" "}
+                  {(items.jobculture +
                     items.joblifelalance +
                     items.compensationbenefit +
                     items.jobsecurityandadvancementr +
@@ -90,10 +92,10 @@ return (
         </Col>
       </Row>
     </Container>
-    {searchResults.map((items) => (
-      <Card>
+    {companyReviews.map((items) => (
+      <Card key={items.id}>
         <Card.Title>{items.commenttitle}</Card.Title>
-        <Card.Text>{items.username}</Card.Text>
+        <Card.Text>Anonymous</Card.Text>
         <Card.Body>{items.usercomment}</Card.Body>
       </Card>
     ))}

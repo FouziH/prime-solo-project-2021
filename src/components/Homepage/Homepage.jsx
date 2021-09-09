@@ -37,6 +37,8 @@ function Homepage() {
   const dispatch = useDispatch()
   const companyInformation = useSelector((store) => store.companyReducer);
   const [search, setSearch] = useState('')
+
+  console.log(companyInformation)
   useEffect(() => {
     dispatch({
       type: "FETCH_COMPANY",
@@ -46,7 +48,7 @@ function Homepage() {
   const onSearch = () => {
     console.log("search is", search)
     dispatch({
-      type: "FETCH_COMPANY_INFORMATION",
+      type: "FETCH_SEARCHED_COMPANY_INFORMATION",
       payload: search,
     });
     setSearch('')
@@ -94,8 +96,8 @@ function Homepage() {
         </Navbar.Collapse>
       </Navbar>
       <Container style={styles.Container}>
-        <Row xs={1} md={2} className="g-4" style={styles.row}>
-          {Array.from({ length: 4 }).map((_, xds) => (
+        <Row xs={3} md={3} className="g-4" style={styles.row}>
+          {Array.from({ length: 1}).map((_, xds) => (
             <Col>
               {companyInformation.map((items, i) => (
                 <Card
@@ -113,37 +115,30 @@ function Homepage() {
                     variant="top"
                     style={styles.cardImage}
                     src={items.imageUrl}
-                    onClick={() => {
-                      dispatch({
-                        type: "FETCH_COMPANY_ID",
-                        payload: items.id,
-                      });
-                      history.push("/companyInfo");
-                    }}
+                    // onClick={() => {
+                    //   dispatch({
+                    //     type: "FETCH_COMPANY_ID",
+                    //     payload: items.id,
+                    //   });
+                    //   history.push("/companyInfo");
+                    // }}
                   />
                   <Card.Body>
-                    <Card.Text>
-                      Average Rating: {(items.jobculture +
-                        items.joblifelalance +
-                        items.compensationbenefit +
-                        items.jobsecurityandadvancementr +
-                        items.management) /
-                        5}
-                    </Card.Text>
                     <Card.Title>{items.companyName}</Card.Title>
+                    <Card.Text>{items.address}</Card.Text>
                     <Card.Text>
-                      {items.address} {items.city}, {items.state} {items.zip}
+                      {items.city}, {items.state} {items.zip}
                     </Card.Text>
                     <Card.Text>Phone number: {items.phoneNumber}</Card.Text>
                     <Button
                       variant="primary"
-                      onClick={() => {
-                        dispatch({
-                          type: "FETCH_COMPANY_ID",
-                          payload: items.id,
-                        });
-                        history.push("/companyInfo");
-                      }}
+                      // onClick={() => {
+                      //   dispatch({
+                      //     type: "FETCH_COMPANY_ID",
+                      //     payload: items.id,
+                      //   });
+                      //   history.push("/companyInfo");
+                      // }}
                     >
                       Lear More
                     </Button>

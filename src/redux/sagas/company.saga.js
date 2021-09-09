@@ -4,7 +4,7 @@ import axios from "axios";
 function* fetchCompany() {
   try {
 
-    const response = yield axios.get("/api/company/information");
+    const response = yield axios.get("/api/company/companies");
     console.log("response data is", response.data);
 
     yield put({ type: "SET_COMPANY", payload: response.data });

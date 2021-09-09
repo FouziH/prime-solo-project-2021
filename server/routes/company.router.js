@@ -21,12 +21,9 @@ JOIN "company" on "company".id = r."companyId"WHERE LOWER("companyName") LIKE $1
     });
 });
 
-router.get('/information', (reg, res)=>{
-   const sqlQuery = `
-   SELECT * FROM "review" as r
-JOIN "user" ON "user".id =r."userId"
-JOIN "company" on "company".id = r."companyId"
-ORDER BY "companyName" ASC`;
+router.get('/companies', (reg, res)=>{
+   const sqlQuery = ` SELECT * FROM "company"`
+;
      pool.query(sqlQuery)
        .then((dbRes) => {
          console.log(dbRes.rows);
@@ -37,12 +34,13 @@ ORDER BY "companyName" ASC`;
          res.sendStatus(500);
        });
 })
-router.get("/information/:id", (req, res) => {
-  const sqlQuery = `SELECT * FROM "review" as r
-JOIN "user" ON "user".id =r."userId"
-JOIN "company" on "company".id = r."companyId"
-WHERE  r."companyId" = $1`;
-    let params = [req.params.id]
+router.get("/review/:id", (req, res) => {
+  const sqlQuery = `SELECT * FROM "company"
+JOIN "review" ON "review"."companyId" = company.id
+WHERE "company".id  = $1`;
+
+  let params = [req.params.id];
+  console.log("params is params yall");
   pool
     .query(sqlQuery, params)
     .then((dbRes) => {
@@ -54,5 +52,23 @@ WHERE  r."companyId" = $1`;
       res.sendStatus(500);
     });
 });
+
+// router.get(, (req, res) => {
+//   let sqlQuery = `SELECT * FROM "review"
+//  WHERE "companyId" =$1`;
+//  pool
+//    .query(sqlQuery, [req.params.id])
+
+//    .then((dbRes) => {
+//      console.log(dbRes.rows);
+//      res.send(dbRes.rows);
+//    })
+//    .catch((error) => {
+//      console.log("Get navbar error is", error);
+//      res.sendStatus(500);
+//    });
+// })
+
+
 
 module.exports = router;
