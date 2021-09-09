@@ -15,6 +15,7 @@ import { useHistory } from "react-router";
 function SpecificCompanyInformation () {
   const history = useHistory()
   const searchResults = useSelector((store) => store.homepageReducer);
+  console.log("search result is:", searchResults)
    const styles = {
     card: {
       backgroundColor: "#B7E0F2",
@@ -69,7 +70,8 @@ return (
                 style={styles.cardImage}
               />
               <Card.Body>
-                <Card.Text>Rating 4.55</Card.Text>
+                <Card.Text>Rating: 4.66
+                </Card.Text>
                 <Card.Title>{items.companyName}</Card.Title>
                 <Card.Text>
                   {items.address} {items.city}, {items.state} {items.zip}
@@ -82,6 +84,13 @@ return (
         </Col>
       </Row>
     </Container>
+    {searchResults.map((items) => (
+      <Card>
+        <Card.Title>{items.commenttitle}</Card.Title>
+        <Card.Text>Anonymous {items.datecreated}</Card.Text>
+        <Card.Body>{items.usercomment}</Card.Body>
+      </Card>
+    ))}
   </>
 );
 }

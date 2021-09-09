@@ -7,7 +7,7 @@ function* fetchCompanyId(action) {
     const response = yield axios.get(`/api/company/information/${action.payload}`);
     console.log("response data is", response.data);
 
-    yield put({ type: "SET_COMPANY_INFORMATION", payload: response.data });
+    yield put({ type: "SET_COMPANY_ID_INFORMATION", payload: response.data });
   } catch (error) {
     console.log("Company Lookup search request error is", error);
   }

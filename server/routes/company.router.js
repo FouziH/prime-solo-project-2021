@@ -3,13 +3,14 @@ const pool = require("../modules/pool");
 const router = express.Router();
 
 router.get("/homepage", (req, res) => {
-//   const params = [req.query.search];
-  let sqlQuery = `  SELECT * FROM "company" WHERE LOWER("companyName") LIKE $1  OR UPPER("companyName") LIKE $1 OR INITCAP("companyName") LIKE $1 `;
-
-//   console.log(params);
+  let params = [`%${req.query.search}%`];
+  let sqlQuery = ` SELECT * FROM "review" as r
+JOIN "user" ON "user".id =r."userId"
+JOIN "company" on "company".id = r."companyId"WHERE LOWER("companyName") LIKE $1  OR UPPER("companyName") LIKE $1 OR INITCAP("companyName") LIKE $1 `;
+ console.log(params);
 
   pool
-    .query(sqlQuery, [`%${req.query.search}%`])
+    .query(sqlQuery,params )
     .then((dbRes) => {
       console.log(dbRes.rows);
       res.send(dbRes.rows);
@@ -21,7 +22,8 @@ router.get("/homepage", (req, res) => {
 });
 
 router.get('/information', (reg, res)=>{
-   const  sqlQuery = `SELECT * FROM "company"
+   const sqlQuery = `
+   SELECT * FROM "company"
     ORDER BY "companyName" ASC`;
      pool.query(sqlQuery)
        .then((dbRes) => {
@@ -34,8 +36,10 @@ router.get('/information', (reg, res)=>{
        });
 })
 router.get("/information/:id", (req, res) => {
-  const sqlQuery = `SELECT * FROM "company"
-    WHERE "id" = $1`;
+  const sqlQuery = `SELECT * FROM "review" as r
+JOIN "user" ON "user".id =r."userId"
+JOIN "company" on "company".id = r."companyId"
+WHERE  r."companyId" = $1`;
     let params = [req.params.id]
   pool
     .query(sqlQuery, params)

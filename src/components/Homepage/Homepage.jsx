@@ -11,21 +11,28 @@ import { useHistory } from 'react-router';
 function Homepage() {
   const history = useHistory()
   const styles = {
-    card: {
-      backgroundColor: "#B7E0F2",
-      padding: "3rem",
-      margin: "auto 5px",
-      width: "80vw",
-      height: "30vh",
-      display: "flex",
-      flexDirection: "rows",
-    },
     cardImage: {
       objectFit: "cover",
-      width: "40vw",
-      height: "30vh",
+      width: "50vw",
+      height: "20vh",
     },
-};
+    Container: {
+      paddingLeft: 0,
+      paddingRight: 0,
+    },
+    row: {
+      marginLeft: 0,
+      marginRight: 0,
+    },
+    col: {
+      paddingLeft: 0,
+      paddingRight: 0,
+    },
+    Card: {
+      margin: "50px",
+      width: "400px",
+    },
+  };
 
   const dispatch = useDispatch()
   const companyInformation = useSelector((store) => store.companyReducer);
@@ -86,25 +93,14 @@ function Homepage() {
           </NavDropdown>
         </Navbar.Collapse>
       </Navbar>
-      <Container>
-        <Row xs={6} md={3}>
-          <Col>
-            {companyInformation.map((items) => (
-              <Card
-                style={{ width: "18rem", flex: 1 }}
-                key={items.id}
-                onClick={() => {
-                  dispatch({
-                    type: "FETCH_COMPANY_ID",
-                    payload: items.id,
-                  });
-                  history.push("/companyInfo");
-                }}
-              >
-                <Card.Img
-                  variant="top"
-                  src={items.imageUrl}
-                  style={styles.cardImage}
+      <Container style={styles.Container}>
+        <Row xs={1} md={2} className="g-4" style={styles.row}>
+          {Array.from({ length: 4 }).map((_, xds) => (
+            <Col>
+              {companyInformation.map((items, i) => (
+                <Card
+                  style={styles.Card}
+                  key={i}
                   onClick={() => {
                     dispatch({
                       type: "FETCH_COMPANY_ID",
@@ -112,16 +108,11 @@ function Homepage() {
                     });
                     history.push("/companyInfo");
                   }}
-                />
-                <Card.Body>
-                  <Card.Text>Rating 4.55</Card.Text>
-                  <Card.Title>{items.companyName}</Card.Title>
-                  <Card.Text>
-                    {items.address} {items.city}, {items.state} {items.zip}
-                  </Card.Text>
-                  <Card.Text>Phone number: {items.phoneNumber}</Card.Text>
-                  <Button
-                    variant="primary"
+                >
+                  <Card.Img
+                    variant="top"
+                    style={styles.cardImage}
+                    src={items.imageUrl}
                     onClick={() => {
                       dispatch({
                         type: "FETCH_COMPANY_ID",
@@ -129,13 +120,39 @@ function Homepage() {
                       });
                       history.push("/companyInfo");
                     }}
-                  >
-                    Lear More
-                  </Button>
-                </Card.Body>
-              </Card>
-            ))}
-          </Col>
+                  />
+                  <Card.Body>
+                    <Card.Text>
+                      Rating:{" "}
+                      {(items.jobculture +
+                        items.joblifelalance +
+                        items.compensationbenefit +
+                        items.jobsecurityandadvancementr +
+                        items.management) /
+                        5}
+                    </Card.Text>
+                    <Card.Title>{items.companyName}</Card.Title>
+                    <Card.Text>
+                      {items.address} {items.city}, {items.state} {items.zip}
+                    </Card.Text>
+                    <Card.Text>Phone number: {items.phoneNumber}</Card.Text>
+                    <Button
+                      variant="primary"
+                      onClick={() => {
+                        dispatch({
+                          type: "FETCH_COMPANY_ID",
+                          payload: items.id,
+                        });
+                        history.push("/companyInfo");
+                      }} 
+                    >
+                      Lear More
+                    </Button>
+                  </Card.Body>
+                </Card>
+              ))}
+            </Col>
+          ))}
         </Row>
       </Container>
     </>
@@ -143,3 +160,57 @@ function Homepage() {
 }
 
 export default Homepage;
+
+
+{/* <Container>
+  <Row xs={6} md={3}>
+    <Col>
+      {companyInformation.map((items) => (
+        <Card
+          style={{ width: "18rem", flex: 1 }}
+          key={items.id}
+          onClick={() => {
+            dispatch({
+              type: "FETCH_COMPANY_ID",
+              payload: items.id,
+            });
+            history.push("/companyInfo");
+          }}
+        >
+          <Card.Img
+            variant="top"
+            src={items.imageUrl}
+            style={styles.cardImage}
+            onClick={() => {
+              dispatch({
+                type: "FETCH_COMPANY_ID",
+                payload: items.id,
+              });
+              history.push("/companyInfo");
+            }}
+          />
+          <Card.Body>
+            <Card.Text>Rating 4.55</Card.Text>
+            <Card.Title>{items.companyName}</Card.Title>
+            <Card.Text>
+              {items.address} {items.city}, {items.state} {items.zip}
+            </Card.Text>
+            <Card.Text>Phone number: {items.phoneNumber}</Card.Text>
+            <Button
+              variant="primary"
+              onClick={() => {
+                dispatch({
+                  type: "FETCH_COMPANY_ID",
+                  payload: items.id,
+                });
+                history.push("/companyInfo");
+              }}
+            >
+              Lear More
+            </Button>
+          </Card.Body>
+        </Card>
+      ))}
+    </Col>
+  </Row>
+</Container>; */}
