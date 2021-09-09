@@ -27,8 +27,8 @@ function SpecificCompanyInformation () {
     },
     cardImage: {
       objectFit: "cover",
-      width: "40vw",
-      height: "30vh",
+      width: "80vw",
+      height: "40vh",
     },
 }
   const goHome = () =>{
@@ -75,7 +75,7 @@ return (
                   {items.address} {items.city}, {items.state} {items.zip}
                 </Card.Text>
                 <Card.Text>Phone number: {items.phoneNumber}</Card.Text>
-                <Button variant="primary">Go somewhere</Button>
+                <Button variant="primary">Write Review</Button>
               </Card.Body>
             </Card>
           ))}

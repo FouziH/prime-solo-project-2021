@@ -86,15 +86,32 @@ function Homepage() {
           </NavDropdown>
         </Navbar.Collapse>
       </Navbar>
-      <Container> 
+      <Container>
         <Row xs={6} md={3}>
           <Col>
             {companyInformation.map((items) => (
-              <Card style={{ width: "18rem", flex: 1 }} key={items.id}>
+              <Card
+                style={{ width: "18rem", flex: 1 }}
+                key={items.id}
+                onClick={() => {
+                  dispatch({
+                    type: "FETCH_COMPANY_ID",
+                    payload: items.id,
+                  });
+                  history.push("/companyInfo");
+                }}
+              >
                 <Card.Img
                   variant="top"
                   src={items.imageUrl}
                   style={styles.cardImage}
+                  onClick={() => {
+                    dispatch({
+                      type: "FETCH_COMPANY_ID",
+                      payload: items.id,
+                    });
+                    history.push("/companyInfo");
+                  }}
                 />
                 <Card.Body>
                   <Card.Text>Rating 4.55</Card.Text>
@@ -103,13 +120,18 @@ function Homepage() {
                     {items.address} {items.city}, {items.state} {items.zip}
                   </Card.Text>
                   <Card.Text>Phone number: {items.phoneNumber}</Card.Text>
-                  <Button variant="primary" onClick={() => {dispatch({
-                    type: "FETCH_COMPANY_ID",
-                    payload: items.id
-                  })
-                history.push("/companyInfo");
-                  }                  
-                  }>Lear More</Button>
+                  <Button
+                    variant="primary"
+                    onClick={() => {
+                      dispatch({
+                        type: "FETCH_COMPANY_ID",
+                        payload: items.id,
+                      });
+                      history.push("/companyInfo");
+                    }}
+                  >
+                    Lear More
+                  </Button>
                 </Card.Body>
               </Card>
             ))}
