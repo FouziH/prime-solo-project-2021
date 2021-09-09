@@ -104,7 +104,7 @@ function Homepage() {
                   </Card.Text>
                   <Card.Text>Phone number: {items.phoneNumber}</Card.Text>
                   <Button variant="primary" onClick={() => {dispatch({
-                    type: "FETCH_COMPANY_INFORMATION",
+                    type: "FETCH_COMPANY_ID",
                     payload: items.id
                   })
                 history.push("/companyInfo");

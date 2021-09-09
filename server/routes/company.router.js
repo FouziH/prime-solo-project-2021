@@ -33,5 +33,20 @@ router.get('/information', (reg, res)=>{
          res.sendStatus(500);
        });
 })
+router.get("/information/:id", (req, res) => {
+  const sqlQuery = `SELECT * FROM "company"
+    WHERE "id" = $1`;
+    let params = [req.params.id]
+  pool
+    .query(sqlQuery, params)
+    .then((dbRes) => {
+      console.log(dbRes.rows);
+      res.send(dbRes.rows);
+    })
+    .catch((error) => {
+      console.log("Get navbar error is", error);
+      res.sendStatus(500);
+    });
+});
 
 module.exports = router;
