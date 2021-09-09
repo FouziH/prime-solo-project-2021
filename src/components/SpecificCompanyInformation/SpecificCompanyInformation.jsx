@@ -70,7 +70,13 @@ return (
                 style={styles.cardImage}
               />
               <Card.Body>
-                <Card.Text>Rating: 4.66
+                <Card.Text>
+                  Average Rating: {(items.jobculture +
+                    items.joblifelalance +
+                    items.compensationbenefit +
+                    items.jobsecurityandadvancementr +
+                    items.management) /
+                    5}
                 </Card.Text>
                 <Card.Title>{items.companyName}</Card.Title>
                 <Card.Text>
@@ -87,7 +93,7 @@ return (
     {searchResults.map((items) => (
       <Card>
         <Card.Title>{items.commenttitle}</Card.Title>
-        <Card.Text>Anonymous {items.datecreated}</Card.Text>
+        <Card.Text>{items.username}</Card.Text>
         <Card.Body>{items.usercomment}</Card.Body>
       </Card>
     ))}

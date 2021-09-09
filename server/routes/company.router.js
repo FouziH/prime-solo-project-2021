@@ -23,8 +23,10 @@ JOIN "company" on "company".id = r."companyId"WHERE LOWER("companyName") LIKE $1
 
 router.get('/information', (reg, res)=>{
    const sqlQuery = `
-   SELECT * FROM "company"
-    ORDER BY "companyName" ASC`;
+   SELECT * FROM "review" as r
+JOIN "user" ON "user".id =r."userId"
+JOIN "company" on "company".id = r."companyId"
+ORDER BY "companyName" ASC`;
      pool.query(sqlQuery)
        .then((dbRes) => {
          console.log(dbRes.rows);

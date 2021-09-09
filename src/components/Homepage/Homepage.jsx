@@ -123,8 +123,7 @@ function Homepage() {
                   />
                   <Card.Body>
                     <Card.Text>
-                      Rating:{" "}
-                      {(items.jobculture +
+                      Average Rating: {(items.jobculture +
                         items.joblifelalance +
                         items.compensationbenefit +
                         items.jobsecurityandadvancementr +
@@ -144,7 +143,7 @@ function Homepage() {
                           payload: items.id,
                         });
                         history.push("/companyInfo");
-                      }} 
+                      }}
                     >
                       Lear More
                     </Button>
