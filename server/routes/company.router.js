@@ -35,9 +35,10 @@ router.get('/companies', (reg, res)=>{
        });
 })
 router.get("/review/:id", (req, res) => {
-  const sqlQuery = `SELECT * FROM "company"
+  const sqlQuery = `SELECT  "company".id, "company"."companyName","company".address,"company".city, "company"."state", "company"."zip","company"."imageUrl", "company"."phoneNumber",ARRAY_AGG("company".id) FROM "company"
 JOIN "review" ON "review"."companyId" = company.id
-WHERE "company".id  = $1`;
+WHERE "company".id  = $1
+GROUP BY "company".id`;
 
   let params = [req.params.id];
   console.log("params is params yall");
@@ -53,21 +54,21 @@ WHERE "company".id  = $1`;
     });
 });
 
-// router.get(, (req, res) => {
-//   let sqlQuery = `SELECT * FROM "review"
-//  WHERE "companyId" =$1`;
-//  pool
-//    .query(sqlQuery, [req.params.id])
+router.get('/information/:id', (req, res) => {
+  let sqlQuery = `SELECT * FROM "review"
+ WHERE "companyId" =$1`;
+ pool
+   .query(sqlQuery, [req.params.id])
 
-//    .then((dbRes) => {
-//      console.log(dbRes.rows);
-//      res.send(dbRes.rows);
-//    })
-//    .catch((error) => {
-//      console.log("Get navbar error is", error);
-//      res.sendStatus(500);
-//    });
-// })
+   .then((dbRes) => {
+     console.log(dbRes.rows);
+     res.send(dbRes.rows);
+   })
+   .catch((error) => {
+     console.log("Get navbar error is", error);
+     res.sendStatus(500);
+   });
+})
 
 
 

@@ -4,7 +4,7 @@ import axios from "axios";
 function* fetchCompanyUserReview(action) {
   try {
       console.log("fetch reviewId is", action.payload)
-    const response = yield axios.get(`/api/company/review/${action.payload}`);
+    const response = yield axios.get(`/api/company/information/${action.payload}`);
     console.log("response data is", response.data);
 
     yield put({ type: "SET_COMPANY_REVIEW_ID", payload: response.data });
