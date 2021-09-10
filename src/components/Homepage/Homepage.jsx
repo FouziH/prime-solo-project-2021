@@ -93,26 +93,6 @@ function Homepage() {
           </NavDropdown>
         </Navbar>
       </Container>
-      {/* <Navbar
-        bg="light"
-        expand="lg"
-        className="navbar navbar-default navbar-fixed-top"
-        role="navigation"
-      >
-        <Navbar.Brand href="#">LAW AUDIT</Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="mr-auto my-2 my-lg-0"
-            style={{ maxHeight: "100px" }}
-            navbarScroll
-          ></Nav>
-          <NavDropdown title={"Home"} id="navbarScrollingDropdown">
-            <NavDropdown.Item href="#action3">Log-in</NavDropdown.Item>
-            <NavDropdown.Item href="#action4">Sign-up</NavDropdown.Item>
-          </NavDropdown>
-        </Navbar.Collapse>
-      </Navbar> */}
       <Container style={styles.Container}>
         <Row xs={3} md={3} className="g-4" style={styles.row}>
           {Array.from({ length: 1 }).map((_, xds) => (
@@ -154,57 +134,3 @@ function Homepage() {
 }
 
 export default Homepage;
-
-
-{/* <Container>
-  <Row xs={6} md={3}>
-    <Col>
-      {companyInformation.map((items) => (
-        <Card
-          style={{ width: "18rem", flex: 1 }}
-          key={items.id}
-          onClick={() => {
-            dispatch({
-              type: "FETCH_COMPANY_ID",
-              payload: items.id,
-            });
-            history.push("/companyInfo");
-          }}
-        >
-          <Card.Img
-            variant="top"
-            src={items.imageUrl}
-            style={styles.cardImage}
-            onClick={() => {
-              dispatch({
-                type: "FETCH_COMPANY_ID",
-                payload: items.id,
-              });
-              history.push("/companyInfo");
-            }}
-          />
-          <Card.Body>
-            <Card.Text>Rating 4.55</Card.Text>
-            <Card.Title>{items.companyName}</Card.Title>
-            <Card.Text>
-              {items.address} {items.city}, {items.state} {items.zip}
-            </Card.Text>
-            <Card.Text>Phone number: {items.phoneNumber}</Card.Text>
-            <Button
-              variant="primary"
-              onClick={() => {
-                dispatch({
-                  type: "FETCH_COMPANY_ID",
-                  payload: items.id,
-                });
-                history.push("/companyInfo");
-              }}
-            >
-              Lear More
-            </Button>
-          </Card.Body>
-        </Card>
-      ))}
-    </Col>
-  </Row>
-</Container>; */}
