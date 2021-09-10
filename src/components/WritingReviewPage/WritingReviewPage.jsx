@@ -93,7 +93,7 @@ export default function WritingReviewPage() {
       <Container>
         <Navbar expand="lg" variant="light" bg="light">
           <Container>
-            <Navbar.Brand href="#">LAW AUDIT</Navbar.Brand>
+            <Navbar.Brand href="#">Law Audit</Navbar.Brand>
           </Container>
           <NavDropdown title={"Home"} id="navbarScrollingDropdown">
             <NavDropdown.Item onClick={() => history.push('/')}>Home</NavDropdown.Item>

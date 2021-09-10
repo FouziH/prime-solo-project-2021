@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import { IoReorderThreeSharp } from "react-icons/io5";
 
 
 function Homepage() {
@@ -58,20 +59,11 @@ function Homepage() {
 
   return (
     <>
-      <Navbar
-        bg="light"
-        expand="lg"
-        className="navbar navbar-default navbar-fixed-top"
-        role="navigation"
-      >
-        <Navbar.Brand href="#">LAW AUDIT</Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="mr-auto my-2 my-lg-0"
-            style={{ maxHeight: "100px" }}
-            navbarScroll
-          ></Nav>
+      <Container>
+        <Navbar expand="lg" variant="light" bg="light">
+          <Container>
+            <Navbar.Brand href="#">Law Audit</Navbar.Brand>
+          </Container>
           <Form className="d-flex">
             <FormControl
               type="text"
@@ -89,15 +81,41 @@ function Homepage() {
               Search
             </Button>
           </Form>
+          <NavDropdown
+            title={<IoReorderThreeSharp />}
+            id="navbarScrollingDropdown"
+          >
+            <NavDropdown.Item onClick={() => history.push("/")}>
+              Home
+            </NavDropdown.Item>
+            <NavDropdown.Item href="#action4">Log-in</NavDropdown.Item>
+            <NavDropdown.Item href="#action5">Sign-up</NavDropdown.Item>
+          </NavDropdown>
+        </Navbar>
+      </Container>
+      {/* <Navbar
+        bg="light"
+        expand="lg"
+        className="navbar navbar-default navbar-fixed-top"
+        role="navigation"
+      >
+        <Navbar.Brand href="#">LAW AUDIT</Navbar.Brand>
+        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Collapse id="navbarScroll">
+          <Nav
+            className="mr-auto my-2 my-lg-0"
+            style={{ maxHeight: "100px" }}
+            navbarScroll
+          ></Nav>
           <NavDropdown title={"Home"} id="navbarScrollingDropdown">
             <NavDropdown.Item href="#action3">Log-in</NavDropdown.Item>
             <NavDropdown.Item href="#action4">Sign-up</NavDropdown.Item>
           </NavDropdown>
         </Navbar.Collapse>
-      </Navbar>
+      </Navbar> */}
       <Container style={styles.Container}>
         <Row xs={3} md={3} className="g-4" style={styles.row}>
-          {Array.from({ length: 1}).map((_, xds) => (
+          {Array.from({ length: 1 }).map((_, xds) => (
             <Col>
               {companyInformation.map((items, i) => (
                 <Card
@@ -123,9 +141,7 @@ function Homepage() {
                       {items.city}, {items.state} {items.zip}
                     </Card.Text>
                     <Card.Text>Phone number: {items.phoneNumber}</Card.Text>
-                    <Button variant="primary">
-                      Lear More
-                    </Button>
+                    <Button variant="primary">Lear More</Button>
                   </Card.Body>
                 </Card>
               ))}

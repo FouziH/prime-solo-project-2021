@@ -12,6 +12,7 @@ import {
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useHistory } from "react-router";
+import { IoReorderThreeSharp } from "react-icons/io5";
 function SpecificCompanyInformation () {
   const history = useHistory()
   const company = useSelector((store) => store.companyIdReducer);
@@ -40,27 +41,20 @@ function SpecificCompanyInformation () {
   }
 return (
   <>
-    <Navbar
-      bg="light"
-      expand="lg"
-      className="navbar navbar-default navbar-fixed-top"
-      role="navigation"
-    >
-      <Navbar.Brand href="#">LAW AUDIT</Navbar.Brand>
-      <Navbar.Toggle aria-controls="navbarScroll" />
-      <Navbar.Collapse id="navbarScroll">
-        <Nav
-          className="mr-auto my-2 my-lg-0"
-          style={{ maxHeight: "100px" }}
-          navbarScroll
-        ></Nav>
-        <NavDropdown title={"Home"} id="navbarScrollingDropdown">
-          <NavDropdown.Item onClick={goHome}>Home</NavDropdown.Item>
-          <NavDropdown.Item href="#action2">Log-in</NavDropdown.Item>
-          <NavDropdown.Item href="#action3">Sign-up</NavDropdown.Item>
+    <Container>
+      <Navbar expand="lg" variant="light" bg="light">
+        <Container>
+          <Navbar.Brand href="#">Law Audit</Navbar.Brand>
+        </Container>
+        <NavDropdown title={<IoReorderThreeSharp />} id="navbarScrollingDropdown">
+          <NavDropdown.Item onClick={() => history.push("/")}>
+            Home
+          </NavDropdown.Item>
+          <NavDropdown.Item href="#action4">My Reviews</NavDropdown.Item>
+          <NavDropdown.Item href="#action5">log-out</NavDropdown.Item>
         </NavDropdown>
-      </Navbar.Collapse>
-    </Navbar>
+      </Navbar>
+    </Container>
     <Container>
       <Row xs={6} md={3}>
         <Col>
