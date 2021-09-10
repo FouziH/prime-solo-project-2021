@@ -21,7 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Homepage from '../Homepage/Homepage';
 import SpecificCompanyInformation from '../SpecificCompanyInformation/SpecificCompanyInformation';
-
+import WritingReviewPage from '../WritingReviewPage/WritingReviewPage';
 import './App.css';
 
 function App() {
@@ -41,6 +41,9 @@ function App() {
         </Route>
         <Route exact path="/companyInfo">
           <SpecificCompanyInformation />
+        </Route>
+        <Route exact path="/writereview">
+          <WritingReviewPage />
         </Route>
       </div>
     </Router>
