@@ -42,7 +42,7 @@ function App() {
         <Route exact path="/companyInfo">
           <SpecificCompanyInformation />
         </Route>
-        <Route exact path="/writereview">
+        <Route exact path="/review">
           <WritingReviewPage />
         </Route>
       </div>
