@@ -35,10 +35,15 @@ router.get('/companies', (reg, res)=>{
        });
 })
 router.get("/review/:id", (req, res) => {
-  const sqlQuery = `SELECT  "company".id, "company"."companyName","company".address,"company".city, "company"."state", "company"."zip","company"."imageUrl", "company"."phoneNumber",ARRAY_AGG("company".id) FROM "company"
-JOIN "review" ON "review"."companyId" = company.id
-WHERE "company".id  = $1
-GROUP BY "company".id`;
+  const sqlQuery = 
+`SELECT 
+    "company".id, "company"."companyName","company".address,"company".city, "company"."state", "company"."zip","company"."imageUrl", "company"."phoneNumber",ARRAY_AGG("company".id) FROM "company"
+JOIN 
+    "review" ON "review"."companyId" = company.id
+WHERE 
+    "company".id  = $1
+GROUP BY 
+    "company".id`;
 
   let params = [req.params.id];
   console.log("params is params yall");

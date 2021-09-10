@@ -115,13 +115,6 @@ function Homepage() {
                     variant="top"
                     style={styles.cardImage}
                     src={items.imageUrl}
-                    // onClick={() => {
-                    //   dispatch({
-                    //     type: "FETCH_COMPANY_ID",
-                    //     payload: items.id,
-                    //   });
-                    //   history.push("/companyInfo");
-                    // }}
                   />
                   <Card.Body>
                     <Card.Title>{items.companyName}</Card.Title>
@@ -130,16 +123,7 @@ function Homepage() {
                       {items.city}, {items.state} {items.zip}
                     </Card.Text>
                     <Card.Text>Phone number: {items.phoneNumber}</Card.Text>
-                    <Button
-                      variant="primary"
-                      // onClick={() => {
-                      //   dispatch({
-                      //     type: "FETCH_COMPANY_ID",
-                      //     payload: items.id,
-                      //   });
-                      //   history.push("/companyInfo");
-                      // }}
-                    >
+                    <Button variant="primary">
                       Lear More
                     </Button>
                   </Card.Body>

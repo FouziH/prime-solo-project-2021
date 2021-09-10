@@ -17,6 +17,7 @@ function SpecificCompanyInformation () {
   const company = useSelector((store) => store.companyIdReducer);
   const companyReviews = useSelector((store) => store.companyReviewReducer);
   console.log("search result is:", company)
+ console.log("company review Reducer is", companyReviews)
    const styles = {
     card: {
       backgroundColor: "#B7E0F2",
@@ -71,15 +72,15 @@ return (
                 style={styles.cardImage}
               />
               <Card.Body>
-                <Card.Text>
-                  Average Rating:{" "}
+                {/* <Card.Text>
+                  Average Rating:
                   {(items.jobculture +
                     items.joblifelalance +
                     items.compensationbenefit +
                     items.jobsecurityandadvancementr +
                     items.management) /
                     5}
-                </Card.Text>
+                </Card.Text> */}
                 <Card.Title>{items.companyName}</Card.Title>
                 <Card.Text>
                   {items.address} {items.city}, {items.state} {items.zip}
@@ -92,11 +93,11 @@ return (
         </Col>
       </Row>
     </Container>
-    {companyReviews.map((items) => (
-      <Card key={items.id}>
-        <Card.Title>{items.commenttitle}</Card.Title>
+    {companyReviews.map((review) => (
+      <Card key={review.id}>
+        <Card.Title>{review.commenttitle}</Card.Title>
         <Card.Text>Anonymous</Card.Text>
-        <Card.Body>{items.usercomment}</Card.Body>
+        <Card.Body>{review.usercomment}</Card.Body>
       </Card>
     ))}
   </>
