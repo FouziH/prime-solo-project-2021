@@ -70,7 +70,7 @@ function AdminViewPage() {
               <td>{items.state}</td>
               <td>{items.zip}</td>
               <td>{items.userId}</td>
-              <td>{items.isflagged}</td>
+              {items.isflagged === false ? <td>No</td> : <td>Yes</td> }
               <td>
                 <Button>view</Button>
               </td>
