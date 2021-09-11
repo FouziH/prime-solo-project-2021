@@ -47,7 +47,7 @@ GROUP BY
     "company".id`;
 
   let params = [req.params.id];
-  console.log("params is params yall");
+  console.log("params is params yall", params);
   pool
     .query(sqlQuery, params)
     .then((dbRes) => {

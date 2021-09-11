@@ -24,3 +24,6 @@ function* addReview(action) {
 function* addReviewSaga (){
     yield takeLatest("ADD_NEW_REVIEW",addReview)
 }
+
+
+export default addReviewSaga

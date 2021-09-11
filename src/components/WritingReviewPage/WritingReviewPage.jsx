@@ -17,18 +17,16 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { Rating, RatingView } from 'react-simple-star-rating'
+import { use } from "passport";
 
 export default function WritingReviewPage() {
     const dispatch = useDispatch()
     const company = useSelector((store) => store.companyIdReducer);
     const user = useSelector((store) => store.user);
-    console.log("company id reducer is", company)
-    console.log("company id is", company[0].id)
-
-    const companyId = company[0].id;
-
-    let userId = user.id
-    console.log("user id is", userId)
+    console.log("company id reducer is", company);
+    const userId = user.id;
+    const companyId = company[0].id
+    console.log("user id is", userId, "company id is", companyId)
     const history= useHistory()
      const styles = {
       card: {
@@ -46,14 +44,14 @@ export default function WritingReviewPage() {
         height: "40vh",
       },
     };
-  const [commentTitle, setCommentTitle] = useState("");
-  const [comment, setComment] = useState("");
-  const [jobWorkLifeBalance, setJobWorkLifeBalance] = useState(0);
-  const [compensationBenefit, setCompensationBenefit] = useState(0);
-  const [jobSecurityAdvancement, setJobSecurityAdvancement] = useState(0)
+  const [commentitle, setCommentTitle] = useState("");
+  const [usercomment, setComment] = useState("");
+  const [joblifebalance, setJobWorkLifeBalance] = useState(0);
+  const [compensationbenefit, setCompensationBenefit] = useState(0);
+  const [jobsecurityandadvancement, setjobsecurityandadvancement] = useState(0)
   const [management, setManagement ] = useState(0);
-  const [jobCulture, setJobCulture] = useState(0);
-
+  const [jobculture, setJobCulture] = useState(0);
+  
   // Catch Rating value
   const handleWorkLifeBalance= (rate) => {
     setJobWorkLifeBalance(rate);
@@ -63,8 +61,8 @@ export default function WritingReviewPage() {
        setCompensationBenefit(rate);
     
    };
-   const handleJobSecurityAdvancement = (rate) => {
-      setJobSecurityAdvancement(rate);
+   const handlejobsecurityandadvancement = (rate) => {
+      setjobsecurityandadvancement(rate);
     };
    const handleManagement = (rate) => {
        setManagement(rate);
@@ -79,19 +77,19 @@ export default function WritingReviewPage() {
       dispatch({
         type: "ADD_NEW_REVIEW",
         payload: {
-          commentTitle,
-          comment,
-          jobCulture,
-          jobSecurityAdvancement,
+          commentitle,
+          usercomment,
+          joblifebalance,
+          jobculture,
+          compensationbenefit,
+          jobsecurityandadvancement,
           management,
-          jobWorkLifeBalance,
-          userId, 
-          companyId
-        }
-
-      })
+          userId,
+          companyId,
+        },
+      });
       //setting these local state to their original state
-      setJobSecurityAdvancement(0);
+      setjobsecurityandadvancement(0);
       setJobWorkLifeBalance(0);
       setJobCulture(0);
       setCompensationBenefit(0);
@@ -125,47 +123,47 @@ export default function WritingReviewPage() {
         </Navbar>
       </Container>
       <Container>
-        <Row xs={6} md={3}>
-          <Col>
-            {company.map((items) => (
-              <Card style={{ width: "18rem", flex: 1 }}>
-                <Card.Img
-                  variant="top"
-                  src={items.imageUrl}
-                  style={styles.cardImage}
-                />
-                <Card.Body>
-                  <Card.Title>{items.companyName}</Card.Title>
-                  <Card.Text>
-                    {items.address} {items.city}, {items.state} {items.zip}
-                  </Card.Text>
-                  <Card.Text>Phone number: {items.phoneNumber}</Card.Text>
-                </Card.Body>
-              </Card>
-            ))}
-          </Col>
-        </Row>
+          <Row xs={6} md={3}>
+            <Col>
+              {company.map((items) => (
+                <Card style={{ width: "18rem", flex: 1 }}>
+                  <Card.Img
+                    variant="top"
+                    src={items.imageUrl}
+                    style={styles.cardImage}
+                  />
+                  <Card.Body>
+                    <Card.Title>{items.companyName}</Card.Title>
+                    <Card.Text>
+                      {items.address} {items.city}, {items.state} {items.zip}
+                    </Card.Text>
+                    <Card.Text>Phone number: {items.phoneNumber}</Card.Text>
+                  </Card.Body>
+                </Card>
+              ))}
+            </Col>
+          </Row>
       </Container>
       <Card.Text>How would you rate this company?</Card.Text>
       <Card.Text>
         Job Work/Life Balance{" "}
         <Rating
           onClick={handleWorkLifeBalance}
-          ratingValue={jobWorkLifeBalance} /* Rating Props */
+          ratingValue={joblifebalance} /* Rating Props */
         />
       </Card.Text>
       <Card.Text>
         Compensation/Benefit{" "}
         <Rating
           onClick={handleCompensationBenefit}
-          ratingValue={compensationBenefit} /* Rating Props */
+          ratingValue={compensationbenefit} /* Rating Props */
         />
       </Card.Text>
       <Card.Text>
         Job.Security/Advancement{" "}
         <Rating
-          onClick={handleJobSecurityAdvancement}
-          ratingValue={jobSecurityAdvancement} /* Rating Props */
+          onClick={handlejobsecurityandadvancement}
+          ratingValue={jobsecurityandadvancement} /* Rating Props */
         />
       </Card.Text>
       <Card.Text>
@@ -179,7 +177,7 @@ export default function WritingReviewPage() {
         Job Culture{" "}
         <Rating
           onClick={handleJobCulture}
-          ratingValue={jobCulture} /* Rating Props */
+          ratingValue={jobculture} /* Rating Props */
         />
       </Card.Text>
       <Card.Text>Review Title</Card.Text>
@@ -187,19 +185,19 @@ export default function WritingReviewPage() {
         controlId="floatingTextarea"
         label="Title"
         className="mb-3"
-        value={commentTitle}
+        value={commentitle}
         style={{ width: "40%" }}
         onChange={(event) => setCommentTitle(event.target.value)}
       >
-        <Form.Control as="textarea" placeholder="Leave a comment here" />
+        <Form.Control as="textarea" placeholder="Leave a usercomment here" />
       </FloatingLabel>
       <Card.Text>Your Review (1500 characters max)*</Card.Text>
       <FloatingLabel controlId="floatingTextarea2" label="Comments">
         <Form.Control
           as="textarea"
-          placeholder="Leave a comment here"
+          placeholder="Leave a usercomment here"
           style={{ height: "150px", width: "40%" }}
-          value={comment}
+          value={usercomment}
           onChange={(event) => setComment(event.target.value)}
         />
       </FloatingLabel>

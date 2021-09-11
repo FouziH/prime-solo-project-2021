@@ -15,19 +15,22 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   let params = [
     req.body.commentitle,
-    req.body.comment,
-    req.body.jobsecurity,
-    req.body.joblifelalance,
-    req.body.jobsecurityandadvancementr,
-    req.body.management,
+    req.body.usercomment,
+    req.body.joblifebalance,
     req.body.compensationbenefit,
-    req.params.userId,
-    req.params.companyId,
+    req.body.jobsecurityandadvancement,
+    req.body.management,
+    req.body.jobculture,
+    req.body.userId,
+    req.body.companyId,
   ];
+
+  console.log("user id", req.body.userId);
+  console.log("company id is", req.body.companyId);
   console.log("post params are:", params)
   let sqlQuery = `
 INSERT INTO "review"
-  ("commenttitle", "usercomment", "joblifelalance", "compensationbenefit",  "jobsecurityandadvancementr",  "management", "jobculture", "userId", "companyId")
+("commenttitle", "usercomment", "joblifebalance", "compensationbenefit",  "jobsecurityandadvancement", "management", "jobculture", "userId", "companyId")
 VALUES
   ($1, $2, $3, $4, $5, $6, $7, $8, $9);`;
   pool.query(sqlQuery, params)
