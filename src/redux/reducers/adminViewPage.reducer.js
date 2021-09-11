@@ -1,4 +1,4 @@
-const admineViewPageReducer = (state =[], action) => {
+const adminViewPageReducer = (state =[], action) => {
     switch(action.type) {
         case"SET_ADMIN_VIEW_DATA":
             return action.payload;
@@ -7,4 +7,4 @@ const admineViewPageReducer = (state =[], action) => {
     }
 }
 
-export default admineViewPageReducer
+export default adminViewPageReducer

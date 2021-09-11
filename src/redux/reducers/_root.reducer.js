@@ -5,7 +5,7 @@ import homepageReducer from './homepage.reducer';
 import companyIdReducer from './companyId.reducer';
 import companyReviewReducer from './companyReview.reducer';
 import companyReducer from './companyReducer';
-import admineViewPageReducer from './adminViewPage.reducer';
+import adminViewPageReducer from './adminViewPage.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -20,7 +20,7 @@ const rootReducer = combineReducers({
   companyIdReducer,
   companyReducer,
   companyReviewReducer,
-  admineViewPageReducer,
+  adminViewPageReducer,
 });
 
 export default rootReducer;

@@ -18,6 +18,8 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 function AdminViewPage() {
+  const adminData = useSelector((store) => store.adminViewPageReducer);
+  console.log("admin data reducer is", adminData)
   const dispatch = useDispatch()
   const history = useHistory()
   useEffect(() => {
