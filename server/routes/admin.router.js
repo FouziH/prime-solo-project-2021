@@ -4,7 +4,8 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
     let sqlQuery = `SELECT * FROM "review"
-JOIN "company" ON "company".id = "review"."companyId"`;
+JOIN "company" ON "company".id = "review"."companyId"
+ORDER BY "review".isflagged ASC`;
 pool.query(sqlQuery)
 .then(dbRes => {
     console.log("admin get data request is", dbRes)
