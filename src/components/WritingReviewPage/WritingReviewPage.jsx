@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { Rating, RatingView } from 'react-simple-star-rating'
 import { use } from "passport";
+import { IoReorderThreeSharp } from "react-icons/io5";
 
 export default function WritingReviewPage() {
     const dispatch = useDispatch()
@@ -113,7 +114,7 @@ export default function WritingReviewPage() {
               Law Audit
             </Navbar.Brand>
           </Container>
-          <NavDropdown title={"Home"} id="navbarScrollingDropdown">
+          <NavDropdown title={<IoReorderThreeSharp/>} id="navbarScrollingDropdown">
             <NavDropdown.Item onClick={() => history.push("/")}>
               Home
             </NavDropdown.Item>

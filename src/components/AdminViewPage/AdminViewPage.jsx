@@ -11,7 +11,10 @@ import {
   Row,
   FloatingLabel,
 } from "react-bootstrap";
+import { IoReorderThreeSharp } from "react-icons/io5";
+import React, {useEffect} from 'react'
 function AdminViewPage() {
+
   return (
     <Container>
       <Navbar expand="lg" variant="light" bg="light">
@@ -20,11 +23,10 @@ function AdminViewPage() {
             Law Audit
           </Navbar.Brand>
         </Container>
-        <NavDropdown title={"Home"} id="navbarScrollingDropdown">
+        <NavDropdown title={<IoReorderThreeSharp/>} id="navbarScrollingDropdown">
           <NavDropdown.Item onClick={() => history.push("/")}>
-            Home
+          Add new company
           </NavDropdown.Item>
-          <NavDropdown.Item href="#action4">My Reviews</NavDropdown.Item>
           <NavDropdown.Item href="#action5">log-out</NavDropdown.Item>
         </NavDropdown>
       </Navbar>
