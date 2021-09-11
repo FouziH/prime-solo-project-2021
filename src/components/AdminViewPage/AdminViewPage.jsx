@@ -48,10 +48,11 @@ function AdminViewPage() {
           </NavDropdown>
         </Navbar>
       </Container>
-      <Table striped bordered hover variant="dark">
+      <Table striped bordered hover>
         <thead>
           <tr>
             <th>Company Name</th>
+            <th>address</th>
             <th>City</th>
             <th>State</th>
             <th>Zip</th>
@@ -61,15 +62,20 @@ function AdminViewPage() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Zimmerman Reed LLP</td>
-            <td>80 S 8th St UNIT 1100</td>
-            <td>Minnespolis</td>
-            <td>Minnesota</td>
-            <td>Zip</td>
-            <td>No</td>
-            <td><Button>view</Button></td>
-          </tr>
+          {adminData.map((items) => (
+            <tr>
+              <td>{items.companyname}</td>
+              <td>{items.address}</td>
+              <td>{items.city}</td>
+              <td>{items.state}</td>
+              <td>{items.zip}</td>
+              <td>{items.userId}</td>
+              <td>{items.isflagged}</td>
+              <td>
+                <Button>view</Button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </Table>
     </>
