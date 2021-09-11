@@ -62,8 +62,8 @@ function AdminViewPage() {
           </tr>
         </thead>
         <tbody>
-          {adminData.map((items) => (
-            <tr>
+          {adminData.map((items, i) => (
+            <tr key={i}>
               <td>{items.companyname}</td>
               <td>{items.address}</td>
               <td>{items.city}</td>
