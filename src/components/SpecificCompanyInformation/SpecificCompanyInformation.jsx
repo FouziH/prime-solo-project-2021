@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect}from 'react'
 import {  useSelector, useDispatch } from "react-redux";
 import {
   Button,
@@ -65,17 +65,18 @@ return (
       </Navbar>
     </Container>
     <Container>
-      <Row xs={6} md={3}>
-        <Col>
-          {company.map((items, i) => (
-            <Card style={{ width: "18rem", flex: 1 }} key={i}>
-              <Card.Img
-                variant="top"
-                src={items.imageUrl}
-                style={styles.cardImage}
-              />
-              <Card.Body>
-                {/* <Card.Text>
+      
+        <Row xs={6} md={3}>
+          <Col>
+            {company.map((items, i) => (
+              <Card style={{ width: "18rem", flex: 1 }} key={i}>
+                <Card.Img
+                  variant="top"
+                  src={items.imageurl}
+                  style={styles.cardImage}
+                />
+                <Card.Body>
+                  {/* <Card.Text>
                   Average Rating:
                   {(items.jobculture +
                     items.joblifelalance +
@@ -84,27 +85,34 @@ return (
                     items.management) /
                     5}
                 </Card.Text> */}
-                <Card.Title>{items.companyName}</Card.Title>
-                <Card.Text>
-                  {items.address} {items.city}, {items.state} {items.zip}
-                </Card.Text>
-                <Card.Text>Phone number: {items.phoneNumber}</Card.Text>
-                <Button variant="primary" onClick={() => {dispatch({
-                  type: items.id,
-                  payload: "FETCH_COMPANY_ID",
-                })
-                history.push('/login')
-                }  }>Write Review</Button>
-              </Card.Body>
-            </Card>
-          ))}
-        </Col>
-      </Row>
+                  <Card.Title>{items.companyname}</Card.Title>
+                  <Card.Text>
+                    {items.address} {items.city}, {items.state} {items.zip}
+                  </Card.Text>
+                  <Card.Text>Phone number: {items.phonenumber}</Card.Text>
+                  <Button
+                    variant="primary"
+                    onClick={() => {
+                      dispatch({
+                        type: items.id,
+                        payload: "FETCH_COMPANY_ID",
+                      });
+                      history.push("/login");
+                    }}
+                  >
+                    Write Review
+                  </Button>
+                </Card.Body>
+              </Card>
+            ))}
+          </Col>
+        </Row>
+     
     </Container>
     {companyReviews.map((review) => (
       <Card key={review.id}>
         <Card.Title>{review.commenttitle}</Card.Title>
-        <Card.Text>Anonymous: {review.userame}</Card.Text>
+        <Card.Text>{review.username}</Card.Text>
         <Card.Body>{review.usercomment}</Card.Body>
       </Card>
     ))}

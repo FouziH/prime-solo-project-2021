@@ -7,7 +7,7 @@ router.get("/homepage", (req, res) => {
   let sqlQuery = `SELECT * FROM "company"
  JOIN "review" ON "review"."companyId" = "company".id
  JOIN "user" ON "user".id ="review"."userId"
- WHERE LOWER("company"."companyName") LIKE $1  OR INITCAP("company"."companyName") LIKE $1 OR UPPER("company"."companyName") LIKE $1  `;
+ WHERE LOWER("company"."companyname") LIKE $1  OR INITCAP("company"."companyname") LIKE $1 OR UPPER("company"."companyname") LIKE $1  `;
  console.log("query search for company name is", params);
 
   pool
@@ -23,7 +23,7 @@ router.get("/homepage", (req, res) => {
 });
 
 router.get('/companies', (reg, res)=>{
-   const sqlQuery = ` SELECT * FROM "company"`
+   const sqlQuery = `SELECT * FROM "company"`;
 ;
      pool.query(sqlQuery)
        .then((dbRes) => {
@@ -36,15 +36,8 @@ router.get('/companies', (reg, res)=>{
        });
 })
 router.get("/review/:id", (req, res) => {
-  const sqlQuery = 
-`SELECT 
-    "company".id, "company"."companyName","company".address,"company".city, "company"."state", "company"."zip","company"."imageUrl", "company"."phoneNumber",ARRAY_AGG("company".id) FROM "company"
-JOIN 
-    "review" ON "review"."companyId" = company.id
-WHERE 
-    "company".id  = $1
-GROUP BY 
-    "company".id`;
+  const sqlQuery = `    SELECT * FROM "company"
+    WHERE id = $1`;
 
   let params = [req.params.id];
   console.log("params is params yall", params);
@@ -62,7 +55,8 @@ GROUP BY
 
 router.get('/information/:id', (req, res) => {
   let sqlQuery = `SELECT * FROM "review"
- WHERE "companyId" =$1`;
+JOIN "user" ON "user".id = "review"."userId"
+WHERE "companyId" =$1`; 
  pool
    .query(sqlQuery, [req.params.id])
 

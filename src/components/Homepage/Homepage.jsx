@@ -39,7 +39,7 @@ function Homepage() {
   const companyInformation = useSelector((store) => store.companyReducer);
   const [search, setSearch] = useState('')
 
-  console.log(companyInformation)
+  console.log("company information reducer is",companyInformation)
   useEffect(() => {
     dispatch({
       type: "FETCH_COMPANY",
@@ -88,7 +88,9 @@ function Homepage() {
             <NavDropdown.Item onClick={() => history.push("/login")}>
               Log-in
             </NavDropdown.Item>
-            <NavDropdown.Item onClick={() => history.push('/registration')}>Sign-up</NavDropdown.Item>
+            <NavDropdown.Item onClick={() => history.push("/registration")}>
+              Sign-up
+            </NavDropdown.Item>
           </NavDropdown>
         </Navbar>
       </Container>
@@ -111,15 +113,15 @@ function Homepage() {
                   <Card.Img
                     variant="top"
                     style={styles.cardImage}
-                    src={items.imageUrl}
+                    src={items.imageurl}
                   />
-                  <Card.Body>
-                    <Card.Title>{items.companyName}</Card.Title>
+                  <Card.Body> 
+                    <Card.Title>{items.companyname}</Card.Title>
                     <Card.Text>{items.address}</Card.Text>
                     <Card.Text>
                       {items.city}, {items.state} {items.zip}
                     </Card.Text>
-                    <Card.Text>Phone number: {items.phoneNumber}</Card.Text>
+                    <Card.Text>Phone number: {items.phonenumber}</Card.Text>
                     <Button variant="primary">Lear More</Button>
                   </Card.Body>
                 </Card>

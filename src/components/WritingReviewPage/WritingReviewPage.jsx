@@ -129,15 +129,15 @@ export default function WritingReviewPage() {
                 <Card style={{ width: "18rem", flex: 1 }}>
                   <Card.Img
                     variant="top"
-                    src={items.imageUrl}
+                    src={items.imageurl}
                     style={styles.cardImage}
                   />
                   <Card.Body>
-                    <Card.Title>{items.companyName}</Card.Title>
+                    <Card.Title>{items.companyname}</Card.Title>
                     <Card.Text>
                       {items.address} {items.city}, {items.state} {items.zip}
                     </Card.Text>
-                    <Card.Text>Phone number: {items.phoneNumber}</Card.Text>
+                    <Card.Text>Phone number: {items.phonenumber}</Card.Text>
                   </Card.Body>
                 </Card>
               ))}
