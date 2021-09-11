@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Navbar, NavDropdown, Container} from "react-bootstrap";
+import { IoReorderThreeSharp } from "react-icons/io5";
+import { useHistory } from "react-router";
 
 function RegisterForm() {
+  const history = useHistory();
   const [userName, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [emailAddress, setEmailAddress] = useState("");
@@ -23,6 +27,17 @@ function RegisterForm() {
   }; // end registerUser
 
   return (
+    <>
+    <Container>
+        <Navbar expand="lg" variant="light" bg="light">
+          <Container>
+            <Navbar.Brand onClick={() => history.push('/')}>Law Audit</Navbar.Brand>
+          </Container>
+          <NavDropdown title={< IoReorderThreeSharp />} id="navbarScrollingDropdown">
+            <NavDropdown.Item onClick={() => history.push('/')}>Home</NavDropdown.Item>
+          </NavDropdown>
+        </Navbar>
+      </Container>
     <form className="formPanel" onSubmit={registerUser}>
       <h2>Register User</h2>
       {errors.registrationMessage && (
@@ -71,6 +86,7 @@ function RegisterForm() {
       </div>
       
     </form>
+    </>
   );
 }
 

@@ -85,11 +85,10 @@ function Homepage() {
             title={<IoReorderThreeSharp />}
             id="navbarScrollingDropdown"
           >
-            <NavDropdown.Item onClick={() => history.push("/")}>
-              Home
+            <NavDropdown.Item onClick={() => history.push("/login")}>
+              Log-in
             </NavDropdown.Item>
-            <NavDropdown.Item href="#action4">Log-in</NavDropdown.Item>
-            <NavDropdown.Item href="#action5">Sign-up</NavDropdown.Item>
+            <NavDropdown.Item onClick={() => history.push('/registration')}>Sign-up</NavDropdown.Item>
           </NavDropdown>
         </Navbar>
       </Container>

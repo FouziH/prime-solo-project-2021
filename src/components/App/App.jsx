@@ -22,6 +22,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import Homepage from '../Homepage/Homepage';
 import SpecificCompanyInformation from '../SpecificCompanyInformation/SpecificCompanyInformation';
 import WritingReviewPage from '../WritingReviewPage/WritingReviewPage';
+import AdminViewPage from '../AdminViewPage/AdminViewPage'
 import './App.css';
 
 function App() {
@@ -45,11 +46,29 @@ function App() {
         <Route exact path="/review">
           <WritingReviewPage />
         </Route>
+        <Route exact path="/login">
+          <LoginPage />
+        </Route>
+        <Route exact path="/registration">
+          <RegisterPage />
+        </Route>
+        {/* <Route exact path="/admin">
+          <AdminViewPage />
+        </Route> */}
+        <ProtectedRoute exact path="/admin">
+          <AdminViewPage />
+        </ProtectedRoute>
       </div>
     </Router>
   );
 }
-
+//<ProtectedRoute
+//             // logged in shows UserPage else shows LoginPage
+//             exact
+//             path="/user"
+//           >
+//             <UserPage />
+//           </ProtectedRoute>
 export default App;
 
 //  <Nav />

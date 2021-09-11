@@ -4,10 +4,11 @@ const router = express.Router();
 
 router.get("/homepage", (req, res) => {
   let params = [`%${req.query.search}%`];
-  let sqlQuery = ` SELECT * FROM "review" as r
-JOIN "user" ON "user".id =r."userId"
-JOIN "company" on "company".id = r."companyId"WHERE LOWER("companyName") LIKE $1  OR UPPER("companyName") LIKE $1 OR INITCAP("companyName") LIKE $1 `;
- console.log(params);
+  let sqlQuery = `SELECT * FROM "company"
+ JOIN "review" ON "review"."companyId" = "company".id
+ JOIN "user" ON "user".id ="review"."userId"
+ WHERE LOWER("company"."companyName") LIKE $1  OR INITCAP("company"."companyName") LIKE $1 OR UPPER("company"."companyName") LIKE $1  `;
+ console.log("query search for company name is", params);
 
   pool
     .query(sqlQuery,params )

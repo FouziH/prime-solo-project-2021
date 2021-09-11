@@ -2,10 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import {
   Navbar,
-  Nav,
   NavDropdown,
   Form,
-  FormControl,
   Button,
   Card,
   Container,
@@ -21,6 +19,16 @@ import { useHistory } from "react-router";
 import { Rating, RatingView } from 'react-simple-star-rating'
 
 export default function WritingReviewPage() {
+    const dispatch = useDispatch()
+    const company = useSelector((store) => store.companyIdReducer);
+    const user = useSelector((store) => store.user);
+    console.log("company id reducer is", company)
+    console.log("company id is", company[0].id)
+
+    const companyId = company[0].id;
+
+    let userId = user.id
+    console.log("user id is", userId)
     const history= useHistory()
      const styles = {
       card: {
@@ -38,17 +46,17 @@ export default function WritingReviewPage() {
         height: "40vh",
       },
     };
-  const [commentTitle, setCommentTitle] = useState('')
-  const [comment, setComment] = useState('') 
-  const [jobWorkLifeBalance, setJobWorkLifeBalance] = useState(0)
+  const [commentTitle, setCommentTitle] = useState("");
+  const [comment, setComment] = useState("");
+  const [jobWorkLifeBalance, setJobWorkLifeBalance] = useState(0);
   const [compensationBenefit, setCompensationBenefit] = useState(0);
   const [jobSecurityAdvancement, setJobSecurityAdvancement] = useState(0)
   const [management, setManagement ] = useState(0);
-  const [jobCulture, setJobCulture] = useState(0)
+  const [jobCulture, setJobCulture] = useState(0);
 
   // Catch Rating value
   const handleWorkLifeBalance= (rate) => {
-    setJobWorkLifeBalance(rate)
+    setJobWorkLifeBalance(rate);
 
   }
    const handleCompensationBenefit= (rate) => {
@@ -65,27 +73,37 @@ export default function WritingReviewPage() {
         setJobCulture(rate);
 
    }
-  const onSubmit =() => {
-      console.log("button for submitting work life balance is", jobWorkLifeBalance)
-      console.log("button for submitting compensation benefit is", compensationBenefit);
-      console.log("button for submitting job security advancement", jobSecurityAdvancement);
-      console.log("button for submitting management is",management);
-      console.log(
-        "button for submitting job culture is",
-        jobCulture
-      );
-      console.log("comment title", commentTitle)
-      console.log("comments is ", comment)
-      setJobSecurityAdvancement(0)
-      setJobWorkLifeBalance(0)
-      setJobCulture(0)
-      setCompensationBenefit(0)
-      setManagement(0)
-      setCommentTitle('')
-      setComment('')
+  const onSubmit =(event) => {
+      event.preventDefault();
+
+      dispatch({
+        type: "ADD_NEW_REVIEW",
+        payload: {
+          commentTitle,
+          comment,
+          jobCulture,
+          jobSecurityAdvancement,
+          management,
+          jobWorkLifeBalance,
+          userId, 
+          companyId
+        }
+
+      })
+      //setting these local state to their original state
+      setJobSecurityAdvancement(0);
+      setJobWorkLifeBalance(0);
+      setJobCulture(0);
+      setCompensationBenefit(0);
+      setManagement(0);
+      setCommentTitle("");
+      setComment("");
+      history.push("/");
   }
   const gohome =() => {
-      console.log("on go home/cancel button")
+      console.log("on go home/cancel button");
+
+      history.push("/");
   }
 
   return (
@@ -93,42 +111,38 @@ export default function WritingReviewPage() {
       <Container>
         <Navbar expand="lg" variant="light" bg="light">
           <Container>
-            <Navbar.Brand href="#">Law Audit</Navbar.Brand>
+            <Navbar.Brand onClick={() => history.push("/")}>
+              Law Audit
+            </Navbar.Brand>
           </Container>
           <NavDropdown title={"Home"} id="navbarScrollingDropdown">
-            <NavDropdown.Item onClick={() => history.push('/')}>Home</NavDropdown.Item>
+            <NavDropdown.Item onClick={() => history.push("/")}>
+              Home
+            </NavDropdown.Item>
             <NavDropdown.Item href="#action4">My Reviews</NavDropdown.Item>
-             <NavDropdown.Item href="#action5">log-out</NavDropdown.Item>
+            <NavDropdown.Item href="#action5">log-out</NavDropdown.Item>
           </NavDropdown>
         </Navbar>
       </Container>
       <Container>
         <Row xs={6} md={3}>
           <Col>
-            {/* begining of map */}
-            <Card style={{ width: "18rem", flex: 1 }}>
-              <Card.Img
-                variant="top"
-                // src={items.imageUrl}
-                style={styles.cardImage}
-              />
-              <Card.Body>
-                {/* <Card.Text>
-                  Average Rating:
-                  {(items.jobculture +
-                    items.joblifelalance +
-                    items.compensationbenefit +
-                    items.jobsecurityandadvancementr +
-                    items.management) /
-                    5}
-                </Card.Text> */}
-                <Card.Title></Card.Title>
-                <Card.Text></Card.Text>
-                <Card.Text>Phone number:</Card.Text>
-                <Card.Text>Phone number:</Card.Text>
-              </Card.Body>
-            </Card>
-            {/* end of map */}
+            {company.map((items) => (
+              <Card style={{ width: "18rem", flex: 1 }}>
+                <Card.Img
+                  variant="top"
+                  src={items.imageUrl}
+                  style={styles.cardImage}
+                />
+                <Card.Body>
+                  <Card.Title>{items.companyName}</Card.Title>
+                  <Card.Text>
+                    {items.address} {items.city}, {items.state} {items.zip}
+                  </Card.Text>
+                  <Card.Text>Phone number: {items.phoneNumber}</Card.Text>
+                </Card.Body>
+              </Card>
+            ))}
           </Col>
         </Row>
       </Container>
@@ -168,7 +182,7 @@ export default function WritingReviewPage() {
           ratingValue={jobCulture} /* Rating Props */
         />
       </Card.Text>
-      <Card.Text>Title</Card.Text>
+      <Card.Text>Review Title</Card.Text>
       <FloatingLabel
         controlId="floatingTextarea"
         label="Title"

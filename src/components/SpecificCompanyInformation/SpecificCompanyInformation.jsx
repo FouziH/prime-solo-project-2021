@@ -1,5 +1,5 @@
 import React from 'react'
-import {  useSelector } from "react-redux";
+import {  useSelector, useDispatch } from "react-redux";
 import {
   Button,
   Card,
@@ -14,6 +14,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useHistory } from "react-router";
 import { IoReorderThreeSharp } from "react-icons/io5";
 function SpecificCompanyInformation () {
+  const dispatch = useDispatch();
   const history = useHistory()
   const company = useSelector((store) => store.companyIdReducer);
   const companyReviews = useSelector((store) => store.companyReviewReducer);
@@ -46,12 +47,20 @@ return (
         <Container>
           <Navbar.Brand href="#">Law Audit</Navbar.Brand>
         </Container>
-        <NavDropdown title={<IoReorderThreeSharp />} id="navbarScrollingDropdown">
+
+        <NavDropdown
+          title={<IoReorderThreeSharp />}
+          id="navbarScrollingDropdown"
+        >
           <NavDropdown.Item onClick={() => history.push("/")}>
             Home
           </NavDropdown.Item>
-          <NavDropdown.Item href="#action4">My Reviews</NavDropdown.Item>
-          <NavDropdown.Item href="#action5">log-out</NavDropdown.Item>
+          <NavDropdown.Item onClick={() => history.push("/login")}>
+            Log-in
+          </NavDropdown.Item>
+          <NavDropdown.Item onClick={() => history.push("/registration")}>
+            Sign-up
+          </NavDropdown.Item>
         </NavDropdown>
       </Navbar>
     </Container>
@@ -80,7 +89,12 @@ return (
                   {items.address} {items.city}, {items.state} {items.zip}
                 </Card.Text>
                 <Card.Text>Phone number: {items.phoneNumber}</Card.Text>
-                <Button variant="primary">Write Review</Button>
+                <Button variant="primary" onClick={() => {dispatch({
+                  type: items.id,
+                  payload: "FETCH_COMPANY_ID",
+                })
+                history.push('/login')
+                }  }>Write Review</Button>
               </Card.Body>
             </Card>
           ))}
@@ -90,7 +104,7 @@ return (
     {companyReviews.map((review) => (
       <Card key={review.id}>
         <Card.Title>{review.commenttitle}</Card.Title>
-        <Card.Text>Anonymous</Card.Text>
+        <Card.Text>Anonymous: {review.userame}</Card.Text>
         <Card.Body>{review.usercomment}</Card.Body>
       </Card>
     ))}
