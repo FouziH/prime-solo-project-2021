@@ -113,7 +113,7 @@ export default function WritingReviewPage() {
       history.push("/");
   }
   const goToMyReviews =() => {
-    fetchAllUserReviews()
+     history.push("/user");
   }
   const fetchAllUserReviews = () => {
     dispatch({
@@ -208,13 +208,13 @@ export default function WritingReviewPage() {
         style={{ width: "40%" }}
         onChange={(event) => setCommentTitle(event.target.value)}
       >
-        <Form.Control as="textarea" placeholder="Leave a usercomment here" />
+        <Form.Control as="textarea" placeholder="Leave a user comment here" />
       </FloatingLabel>
       <Card.Text>Your Review (1500 characters max)*</Card.Text>
       <FloatingLabel controlId="floatingTextarea2" label="Comments">
         <Form.Control
           as="textarea"
-          placeholder="Leave a usercomment here"
+          placeholder="Leave a user comment here"
           style={{ height: "150px", width: "40%" }}
           value={usercomment}
           onChange={(event) => setComment(event.target.value)}

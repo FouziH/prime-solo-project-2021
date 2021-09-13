@@ -36,6 +36,7 @@ function AddNewCompany() {
             type: "ADD_NEW_COMPANY",
             payload: newCompany
         })
+        history.push('/admin')
 
     }
 
