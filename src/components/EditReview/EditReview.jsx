@@ -9,97 +9,93 @@ import {
   Container,
   Col,
   Row,
-  FloatingLabel
+  FloatingLabel,
 } from "react-bootstrap";
 import LoginPage from "../LoginPage/LoginPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { Rating, RatingView } from 'react-simple-star-rating'
 import { use } from "passport";
 import { IoReorderThreeSharp } from "react-icons/io5";
+import { Rating, RatingView } from "react-simple-star-rating";
 
-export default function WritingReviewPage() {
-    const dispatch = useDispatch();
-    const company = useSelector((store) => store.companyIdReducer);
-    const user = useSelector((store) => store.user);
-    console.log("company id reducer is", company);
-    const userId = user.id;
-    const companyId = company[0].id
-    console.log("user id is", userId, "company id is", companyId)
-     useEffect(() => {
-       dispatch({
-         type: "FETCH_COMPANY_ID",
-         payload: companyId,
-       });
-     }, [companyId]);
-    const history= useHistory()
-     const styles = {
-      card: {
-        backgroundColor: "#B7E0F2",
-        padding: "3rem",
-        margin: "auto 5px",
-        width: "80vw",
-        height: "30vh",
-        display: "flex",
-        flexDirection: "rows",
-      },
-      cardImage: {
-        objectFit: "cover",
-        width: "80vw",
-        height: "40vh",
-      },
-    };
+export default function EditReview() {
+  const dispatch = useDispatch();
+  const company = useSelector((store) => store.companyIdReducer);
+  const user = useSelector((store) => store.user);
+  console.log("company id reducer is", company);
+  const userId = user.id;
+  const companyId = company[0].id;
+  console.log("user id is", userId, "company id is", companyId);
+  useEffect(() => {
+    dispatch({
+      type: "FETCH_COMPANY_ID",
+      payload: companyId,
+    });
+  }, [companyId]);
+  const history = useHistory();
+  const styles = {
+    card: {
+      backgroundColor: "#B7E0F2",
+      padding: "3rem",
+      margin: "auto 5px",
+      width: "80vw",
+      height: "30vh",
+      display: "flex",
+      flexDirection: "rows",
+    },
+    cardImage: {
+      objectFit: "cover",
+      width: "80vw",
+      height: "40vh",
+    },
+  };
   const [commentitle, setCommentTitle] = useState("");
   const [usercomment, setComment] = useState("");
   const [joblifebalance, setJobWorkLifeBalance] = useState(0);
   const [compensationbenefit, setCompensationBenefit] = useState(0);
-  const [jobsecurityandadvancement, setjobsecurityandadvancement] = useState(0)
-  const [management, setManagement ] = useState(0);
+  const [jobsecurityandadvancement, setjobsecurityandadvancement] = useState(0);
+  const [management, setManagement] = useState(0);
   const [jobculture, setJobCulture] = useState(0);
-  
+
   // Catch Rating value
-  const handleWorkLifeBalance= (rate) => {
+  const handleWorkLifeBalance = (rate) => {
     setJobWorkLifeBalance(rate);
+  };
+  const handleCompensationBenefit = (rate) => {
+    setCompensationBenefit(rate);
+  };
+  const handlejobsecurityandadvancement = (rate) => {
+    setjobsecurityandadvancement(rate);
+  };
+  const handleManagement = (rate) => {
+    setManagement(rate);
+  };
+  const handleJobCulture = (rate) => {
+    setJobCulture(rate);
+  };
+  const onSubmit = (event) => {
+    event.preventDefault();
+    dispatch({
+      type: "UPDATE_REVIEW",
+      payload: {
+        commentitle,
+        usercomment,
+        joblifebalance,
+        jobculture,
+        compensationbenefit,
+        jobsecurityandadvancement,
+        management,
+        companyId,
+      },
+    });
+    //calling function to get local state to their original state
+    resetLocalState();
 
-  }
-   const handleCompensationBenefit= (rate) => {
-       setCompensationBenefit(rate);
-    
-   };
-   const handlejobsecurityandadvancement = (rate) => {
-      setjobsecurityandadvancement(rate);
-    };
-   const handleManagement = (rate) => {
-       setManagement(rate);
-     };
-   const handleJobCulture = (rate) => {
-        setJobCulture(rate);
-
-   }
-  const onSubmit =(event) => {
-      event.preventDefault();
-      dispatch({
-        type: "ADD_NEW_REVIEW",
-        payload: {
-          commentitle,
-          usercomment,
-          joblifebalance,
-          jobculture,
-          compensationbenefit,
-          jobsecurityandadvancement,
-          management,
-          userId,
-          companyId,
-        },
-      });
-      //calling function to get local state to their original state
-      resetLocalState()
-
-       fetchAllUserReviews()
-  }
-  const resetLocalState =() =>{
+    fetchAllUserReviews();
+  };
+  const resetLocalState = () => {
     setjobsecurityandadvancement(0);
     setJobWorkLifeBalance(0);
     setJobCulture(0);
@@ -107,25 +103,26 @@ export default function WritingReviewPage() {
     setManagement(0);
     setCommentTitle("");
     setComment("");
-  }
-  const goHome =() => {
-
-      history.push("/");
-  }
-  const goToMyReviews =() => {
-    fetchAllUserReviews()
-  }
+  };
+  const goHome = () => {
+    history.push("/user");
+  };
+  const goToMyReviews = () => {
+    fetchAllUserReviews();
+  };
   const fetchAllUserReviews = () => {
     dispatch({
-        type: "FETCH_ALL_USER_REVIEWS",
-        payload: userId,
-      });
-      history.push("/user");
-  }
+      type: "FETCH_ALL_USER_REVIEWS",
+      payload: userId,
+    });
+    history.push("/user");
+  };
+   
+
 
   return (
     <>
-      <Container>
+    <Container>
         <Navbar expand="lg" variant="light" bg="light">
           <Container>
             <Navbar.Brand onClick={() => history.push("/")}>
@@ -163,7 +160,7 @@ export default function WritingReviewPage() {
             </Col>
           </Row>
       </Container>
-      <Card.Text>How would you rate this company?</Card.Text>
+      <Card.Text>Please update you review below here:</Card.Text>
       <Card.Text>
         Job Work/Life Balance{" "}
         <Rating
@@ -221,10 +218,10 @@ export default function WritingReviewPage() {
         />
       </FloatingLabel>
       <Button onClick={goHome}>Cancel</Button>
-      <Button onClick={onSubmit}>Submit</Button>
+      <Button onClick={onSubmit}>Update</Button>
     </>
+  
+
   );
 }
-
-
 

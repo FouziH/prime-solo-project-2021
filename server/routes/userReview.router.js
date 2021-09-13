@@ -33,6 +33,7 @@ WHERE id = $1; `;
 let params = [req.params.id]
 pool.query(sqlQuery, params)
 .then(dbRes => {
+    console.log("delete item is", dbRes)
     res.sendStatus(200)
 }).catch(error => {
     res.sendStatus(500)

@@ -12,7 +12,7 @@ import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-
+import AddNewCompany from '../AddNewCompany/AddNewCompany';
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
@@ -25,6 +25,7 @@ import WritingReviewPage from '../WritingReviewPage/WritingReviewPage';
 import AdminViewPage from '../AdminViewPage/AdminViewPage'
 import UserViewPag from '../UserViewPage/UserViewPage';
 import './App.css';
+import EditReview from '../EditReview/EditReview';
 
 function App() {
   const dispatch = useDispatch();
@@ -38,6 +39,12 @@ function App() {
   return (
     <Router>
       <div>
+        <Route exact path="/addCompany">
+          <AddNewCompany />
+        </Route>
+        <Route exact path="/edit">
+          <EditReview />
+        </Route>
         <Route exact path="/">
           <Homepage />
         </Route>
@@ -53,7 +60,7 @@ function App() {
         <Route exact path="/registration">
           <RegisterPage />
         </Route>
-        <Route exact path = "/user">
+        <Route exact path="/user">
           <UserViewPag />
         </Route>
         {/* <Route exact path="/admin">

@@ -37,7 +37,7 @@ function AdminViewPage() {
             title={<IoReorderThreeSharp />}
             id="navbarScrollingDropdown"
           >
-            <NavDropdown.Item onClick={() => history.push("/")}>
+            <NavDropdown.Item onClick={() => history.push("/addCompany")}>
               Add new company
             </NavDropdown.Item>
             <NavDropdown.Item href="#action5">log-out</NavDropdown.Item>

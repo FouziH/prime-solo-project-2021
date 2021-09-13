@@ -36,7 +36,7 @@ router.get('/companies', (reg, res)=>{
        });
 })
 router.get("/review/:id", (req, res) => {
-  const sqlQuery = `    SELECT * FROM "company"
+  const sqlQuery = `SELECT * FROM "company"
     WHERE id = $1`;
 
   let params = [req.params.id];
@@ -68,6 +68,29 @@ WHERE "companyId" =$1`;
      console.log("Get navbar error is", error);
      res.sendStatus(500);
    });
+})
+
+router.post("/add", (req, res) => {
+  let sqlQuery = `INSERT INTO "company"
+("companyname", "address", "city", "state", "zip", "phonenumber", "imageurl")
+VALUES
+($1, $2, $3, $4, $5, $6, $7)`;
+let params = [
+  req.body.companyname,
+  req.body.address,
+  req.body.city,
+  req.body.state,
+  req.body.zip,
+  req.body.phonenumber,
+  req.body.imageurl
+]
+pool.query(sqlQuery, params)
+.then(dbRes =>{
+  console.log("new company added is", dbRes)
+  res.sendStatus(200)
+}).catch(error => {
+  console.log("new company add error is", error)
+})
 })
 
 

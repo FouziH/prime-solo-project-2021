@@ -9,6 +9,7 @@ import fetchCompanyUserReviewSaga from './companyReview.saga';
 import addReviewSaga from './addNewReview.saga'
 import fetchAdminViewPageDataSaga from './adminViewPage.saga';
 import fetchUserViewPageSaga from './userViewPage.saga';
+import addNewCompanySaga from './addNewCompany.saga';
 import deleteUserReview from './deleteReview.saga';
 
 // rootSaga is the primary saga.
@@ -30,6 +31,7 @@ export default function* rootSaga() {
     addReviewSaga(),
     fetchAdminViewPageDataSaga(),
     fetchUserViewPageSaga(),
-    deleteUserReview()
+    deleteUserReview(), 
+    addNewCompanySaga()
   ]);
 }
