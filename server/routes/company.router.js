@@ -7,7 +7,7 @@ router.get("/homepage", (req, res) => {
   let sqlQuery = `SELECT * FROM "company"
  JOIN "review" ON "review"."companyId" = "company".id
  JOIN "user" ON "user".id ="review"."userId"
- WHERE LOWER("company"."companyname") LIKE $1  OR INITCAP("company"."companyname") LIKE $1 OR UPPER("company"."companyname") LIKE $1  `;
+ WHERE LOWER("company"."companyname") LIKE $1  OR INITCAP("company"."companyname") LIKE $1 OR UPPER("company"."companyname") LIKE $1`;
  console.log("query search for company name is", params);
 
   pool
