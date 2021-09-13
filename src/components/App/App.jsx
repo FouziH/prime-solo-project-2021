@@ -23,6 +23,7 @@ import Homepage from '../Homepage/Homepage';
 import SpecificCompanyInformation from '../SpecificCompanyInformation/SpecificCompanyInformation';
 import WritingReviewPage from '../WritingReviewPage/WritingReviewPage';
 import AdminViewPage from '../AdminViewPage/AdminViewPage'
+import UserViewPag from '../UserViewPage/UserViewPage';
 import './App.css';
 
 function App() {
@@ -51,6 +52,9 @@ function App() {
         </Route>
         <Route exact path="/registration">
           <RegisterPage />
+        </Route>
+        <Route exact path = "/user">
+          <UserViewPag />
         </Route>
         {/* <Route exact path="/admin">
           <AdminViewPage />

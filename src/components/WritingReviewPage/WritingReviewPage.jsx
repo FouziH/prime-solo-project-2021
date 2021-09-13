@@ -21,13 +21,20 @@ import { use } from "passport";
 import { IoReorderThreeSharp } from "react-icons/io5";
 
 export default function WritingReviewPage() {
-    const dispatch = useDispatch()
+ 
+    const dispatch = useDispatch();
     const company = useSelector((store) => store.companyIdReducer);
     const user = useSelector((store) => store.user);
     console.log("company id reducer is", company);
     const userId = user.id;
     const companyId = company[0].id
     console.log("user id is", userId, "company id is", companyId)
+     useEffect(() => {
+       dispatch({
+         type: "FETCH_COMPANY_ID",
+         payload: companyId,
+       });
+     }, []);
     const history= useHistory()
      const styles = {
       card: {
@@ -104,6 +111,9 @@ export default function WritingReviewPage() {
 
       history.push("/");
   }
+  const goToMyReviews =() => {
+    history.push('/user');
+  }
 
   return (
     <>
@@ -118,7 +128,7 @@ export default function WritingReviewPage() {
             <NavDropdown.Item onClick={() => history.push("/")}>
               Home
             </NavDropdown.Item>
-            <NavDropdown.Item href="#action4">My Reviews</NavDropdown.Item>
+            <NavDropdown.Item onClick={goToMyReviews}>My Reviews</NavDropdown.Item>
             <NavDropdown.Item href="#action5">log-out</NavDropdown.Item>
           </NavDropdown>
         </Navbar>

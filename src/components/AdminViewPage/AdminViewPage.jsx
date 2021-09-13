@@ -12,13 +12,10 @@ import React from 'react'
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import AdminViewPageItems from "../RegisterForm/AdminViewPageItems/AdminViewPageItems";
+import AdminViewPageItems from "../AdminViewPageItems/AdminViewPageItems";
 function AdminViewPage() {
   const adminData = useSelector((store) => store.adminViewPageReducer);
   console.log("admin data reducer is", adminData)
-  const [modelInfo, setModelInfo] = useState([])
-  const [showModal, setShowModal] = useState(false)
-  const [show, setShow] = useState(false)
   const dispatch = useDispatch()
   const history = useHistory()
   useEffect(() => {
@@ -26,28 +23,6 @@ function AdminViewPage() {
       type: "FETCH_ADMIN_VIEW_DATA"
     })
   }, [])
-  const handleClose =() =>setShow(false)
-  const handleShow = () => setShow(true);
-  
-
-  const toggleTrueFalse = () => {
-    setShowModal(handleShow)
-  }
-
-  const modelContent = () => {
-    return (
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>{item.commenttitle}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>{items.usercomment}</Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onclick={handleClose}>Approve</Button>
-          <Button variant="secondary">Delete</Button>
-        </Modal.Footer>
-      </Modal>
-    );
-  }
 
   return (
     <>

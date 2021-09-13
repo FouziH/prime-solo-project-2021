@@ -19,4 +19,4 @@ function* fetchAdminViewPageDataSaga(){
    yield takeLatest("FETCH_ADMIN_VIEW_DATA", fetchAdminViewPageData);  
 }
 
-export default fetchAdminViewPageData
+export default fetchAdminViewPageDataSaga;

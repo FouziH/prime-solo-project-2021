@@ -18,8 +18,15 @@ function SpecificCompanyInformation () {
   const history = useHistory()
   const company = useSelector((store) => store.companyIdReducer);
   const companyReviews = useSelector((store) => store.companyReviewReducer);
-  console.log("search result is:", company)
- console.log("company review Reducer is", companyReviews)
+  
+  
+  console.log("company review Reducer is", companyReviews)
+ useEffect(() => {
+    // dispatch({
+    //   type: "FETCH_COMPANY_ID",
+    //   payload: company[0].id
+    // });
+ },[])
    const styles = {
     card: {
       backgroundColor: "#B7E0F2",
@@ -94,8 +101,8 @@ return (
                     variant="primary"
                     onClick={() => {
                       dispatch({
-                        type: items.id,
-                        payload: "FETCH_COMPANY_ID",
+                        type: "FETCH_COMPANY_ID",
+                        payload: items.id ,
                       });
                       history.push("/login");
                     }}

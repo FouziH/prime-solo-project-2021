@@ -6,6 +6,7 @@ import companyIdReducer from './companyId.reducer';
 import companyReviewReducer from './companyReview.reducer';
 import companyReducer from './companyReducer';
 import adminViewPageReducer from './adminViewPage.reducer';
+import userReviewReducer from './userReview.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   companyReducer,
   companyReviewReducer,
   adminViewPageReducer,
+  userReviewReducer,
 });
 
 export default rootReducer;
