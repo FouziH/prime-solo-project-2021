@@ -26,4 +26,17 @@ pool.query(sqlQuery, params)
 })
 })
 
+router.delete('/:id', (req, res) => {
+    console.log("req params id is", req.params.id);
+    let sqlQuery = `DELETE FROM "review"
+WHERE id = $1; `;
+let params = [req.params.id]
+pool.query(sqlQuery, params)
+.then(dbRes => {
+    res.sendStatus(200)
+}).catch(error => {
+    res.sendStatus(500)
+})
+})
+
 module.exports = router;

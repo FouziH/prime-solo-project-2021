@@ -18,8 +18,10 @@ function* fetchUserViewData (action) {
 }
 
 
+
 function* fetchUserViewPageSaga() {
     yield takeLatest("FETCH_ALL_USER_REVIEWS", fetchUserViewData)
+    
 }
 
 
